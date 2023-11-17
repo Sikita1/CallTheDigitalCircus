@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Plugins.Audio.Core;
 using YG;
 
 public class Controller : MonoBehaviour
@@ -9,14 +10,14 @@ public class Controller : MonoBehaviour
 
     [SerializeField] private AllPersons _allPersons;
 
-    [SerializeField] private AudioClip[] _audioCaine;
-    [SerializeField] private AudioClip[] _audioGangle;
-    [SerializeField] private AudioClip[] _audioJax;
-    [SerializeField] private AudioClip[] _audioKinger;
-    [SerializeField] private AudioClip[] _audioPomni;
-    [SerializeField] private AudioClip[] _audioRagatha;
-    [SerializeField] private AudioClip[] _audioZooble;
-    [SerializeField] private AudioClip[] _audioHorror;
+    //[SerializeField] private AudioClip[] _audioCaine;
+    //[SerializeField] private AudioClip[] _audioGangle;
+    //[SerializeField] private AudioClip[] _audioJax;
+    //[SerializeField] private AudioClip[] _audioKinger;
+    //[SerializeField] private AudioClip[] _audioPomni;
+    //[SerializeField] private AudioClip[] _audioRagatha;
+    //[SerializeField] private AudioClip[] _audioZooble;
+    //[SerializeField] private AudioClip[] _audioHorror;
 
     [SerializeField] private Image _caineHorror;
     [SerializeField] private Image _gangleHorror;
@@ -26,8 +27,19 @@ public class Controller : MonoBehaviour
     [SerializeField] private Image _ragathaHorror;
     [SerializeField] private Image _zoobleHorror;
 
+    [SerializeField] private SourceAudio _source;
+
     private AudioSource _audioSource;
     private int _countADS;
+
+    private string[] _audioCaine = { "Kain", "Kaint", "Kainp", "Kainpo", "Kainy" };
+    private string[] _audioGangle = { "Gangle", "GangleM", "GangleO", "GangleH", "GangleY" };
+    private string[] _audioJax = { "Jax", "JaxK", "JaxT", "JaxA", "JaxY" };
+    private string[] _audioKinger = { "Kinger", "KingerK", "KingerM", "KingerN", "KingerT" };
+    private string[] _audioPomni = { "Pomni", "PomniZ", "PomniM", "PomniH" };
+    private string[] _audioRagatha = { "RAGATHA", "RAGATHAV", "RAGATHAI", "RAGATHAP", "RAGATHAH" };
+    private string[] _audioZooble = { "ZOOBLE", "ZOOBLEO", "ZOOBLEY", "ZOOBLEYA" };
+    private string[] _audioHorror = { "Horror", "HorrorF", "HorrorS", "HorrorST", "HorrorZ" };
 
     private void Awake()
     {
@@ -180,11 +192,15 @@ public class Controller : MonoBehaviour
         return isChance;
     }
 
-    private void PlayAudioCharacter(AudioClip[] audioClips)
-    {
-        _audioSource.clip = GetRundomAudio(audioClips);
-        _audioSource.Play();
-    }
+    //private void PlayAudioCharacter(AudioClip[] audioClips)
+    //{
+    //    _audioSource.clip = GetRundomAudio(audioClips);
+    //    _audioSource.Play();
+
+    //    //_source.Play(GetRandomAudio(audioClips));
+    //}
+
+    private void PlayAudioCharacter(string[] audioClips) => _source.Play(GetRandomAudio(audioClips));
 
     private void ShowCharacterImage(Image image)
     {
@@ -193,11 +209,17 @@ public class Controller : MonoBehaviour
         _panel.gameObject.SetActive(true);
     }
 
-    private AudioClip GetRundomAudio(AudioClip[] audioClips)
+    private string GetRandomAudio(string[] audioClips)
     {
-        int randomNumber = Random.Range(0, audioClips.Length);
-        return audioClips[randomNumber];
+        int randonString = Random.Range(0, audioClips.Length);
+        return audioClips[Random.Range(0, audioClips.Length)];
     }
+
+    //private AudioClip GetRundomAudio(AudioClip[] audioClips)
+    //{
+    //    int randomNumber = Random.Range(0, audioClips.Length);
+    //    return audioClips[randomNumber];
+    //}
 
     private int _counterADS() => _countADS++;
 }
